@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://code.alibabatech.com/schema/dubbo 
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
+	default-autowire="byName">
+	<!--dubbo调用 -->
+	<dubbo:reference id="topicsService" 
+		interface="com.e2edour.app.facade.TopicsFacade"
+		check=" false " timeout="11000" retries="0" />
+
+	<dubbo:reference id="settingManagerService"
+		interface="com.e2edour.app.facade.SettingManagerFacade"
+		check=" false " timeout="11000" retries="0" />
+
+	<dubbo:reference id="surpriseService" 
+		interface="com.e2edour.app.facade.ISurpriseService" 
+		check=" false " timeout="11000" retries="0" />
+
+	<dubbo:reference id="leaveMsgService"
+		interface="com.e2edour.app.facade.ILeaveMsgService" 
+		check=" false " timeout="11000" retries="0" />
+	
+		
+	<dubbo:reference id="loginFacade" 
+		interface="com.e2edour.app.facade.LoginFacade" 
+		check=" false " timeout="11000" retries="0" />
+
+	<dubbo:reference id="fetcherFacade"
+					 interface="com.e2edour.app.facade.FetcherFacade"
+					 check=" false " timeout="11000" retries="0" />
+
+	<dubbo:reference id="eaasyManagerFacade"
+					 interface="com.e2edour.app.facade.EaasyManagerFacade"
+					 check=" false " timeout="11000" retries="0" />
+</beans>

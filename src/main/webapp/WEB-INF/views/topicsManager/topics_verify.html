@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <#include "../resource.tag"/>
+    <script src="${staticFileRoot}/js/views/topicsManager/topics_verify.js"></script>
+</head>
+<body>
+<div class="col-lg-2 col-lg-offset-5">
+    <form id="searchForm" method="post" class="form-horizontal">
+        <div class="form-group">
+            <!-- col-lg-12 -->
+            <button type="button" class="btn btn-${_theme} btn-block"
+                    id="searchBtn">查询
+            </button>
+        </div>
+    </form>
+</div>
+<div class="col-lg-12">
+    <div class="panel panel-${_theme}" id="AAA_Panel">
+        <div class="panel-heading">查询结果</div>
+        <div class="panel-body">
+            <table class="table table-condensed table-hover table-striped" id="AAA_Table">
+                <thead>
+                <th data-column-id="id" data-type="numeric" data-identifier="true" data-identifier="true">贴子编号</th>
+                <th data-column-id="author">发贴人</th>
+                <th data-column-id="content" data-formatter="link" data-sortable="false">内容</th>
+                <th data-column-id="createDate">更新时间</th>
+                <th data-column-id="commands" data-formatter="commands" data-sortable="false">操作</th>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+

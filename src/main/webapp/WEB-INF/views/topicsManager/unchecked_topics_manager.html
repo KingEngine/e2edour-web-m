@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <#include "../resource.tag"/>
+    <script src="${staticFileRoot}/js/views/topicsManager/unchecked_topics_manager.js"></script>
+    <!-- 时间控件 -->
+    <script type='text/javascript' src="${staticFileRoot}/js/bootstrap-datetimepicker-util.min.js"></script>
+</head>
+<div class="animated fadeInRight">
+    <div class="row">
+
+        <form id="searchForm" method="post" class="form-horizontal">
+            <div class="form-group"><br>
+                <label class="col-sm-1 control-label">时间:</label>
+                <div class="col-sm-3">
+                    <div class="input-group date datepicker-inputter" data-date="" data-date-format="yyyy-mm-dd"
+                         data-link-field="beginDate" data-link-format="yyyy-mm-dd">
+                        <input id="beginDate" class="form-control" type="text" value="" readonly>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="input-group date datepicker-inputter" data-date="" data-date-format="yyyy-mm-dd"
+                         data-link-field="endDate" data-link-format="yyyy-mm-dd">
+                        <input id="endDate" class="form-control" type="text" value="" readonly>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                </div>
+                <label class="col-sm-1 control-label">渠道:</label>
+
+                <div class="col-sm-2">
+                    <select class="form-control">
+                        <option>-----请选择-----</option>
+                        <option>爬虫</option>
+                        <option>管理员发布</option>
+                        <option>会员发布</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <button type="button" class="btn btn-${_theme} btn-block"
+                            id="searchBtn">查询
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <div class="col-sm-10 col-sm-offset-1">
+            <div class="panel panel-${_theme}" id="AAA_Panel" style="display: none;">
+                <div class="panel-heading">查询结果</div>
+                <div class="panel-body">
+                    <table class="table table-hover table-condensed table-bordered table-striped" id="AAA_Table">
+                        <thead>
+                        <th data-column-id="id" data-identifier="true">ID</th>
+                        <th data-column-id="type">贴子类型</th>
+                        <th data-column-id="title">标题</th>
+                        <th data-column-id="content">内容</th>
+                        <th data-column-id="createDateStr">创建时间</th>
+                        <th data-column-id="channel">渠道</th>
+                        <th data-column-id="author">作者</th>
+                        <th data-column-id="operation" data-formatter="operation">操作</th>
+                        </thead>
+                    </table>
+                    <button type="button" class="btn btn-success glyphicon glyphicon-ok" id="verifyPassBtn">
+                        通过
+                    </button>
+                    <button type="button" class="btn btn-danger glyphicon glyphicon-remove-circle" id="verifyRejectBtn">
+                        不通过
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>
+

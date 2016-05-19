@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <#include "../resource.tag"/>
+    <script src="${staticFileRoot}/js/views/backManager/menus_manager.js"></script>
+</head>
+
+<div class="row">
+    <ol class="breadcrumb">
+        <li>后端管理</li>
+        <li>菜单管理</li>
+    </ol>
+    <form id="searchForm" method="post" class="form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-2 col-sm-offset-5">
+                <button type="button" class="btn btn-${_theme}"
+                        id="searchBtn">查&nbsp;&nbsp;询
+                </button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-${_theme}"
+                        id="showAddDataDivBtn">新&nbsp;&nbsp;增
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="col-sm-12">
+    <div class="panel panel-${_theme}" id="AAA_Panel" style="display: none;">
+        <div class="panel-heading">查询结果</div>
+        <div class="panel-body">
+            <table class="table table-hover table-condensed table-bordered table-striped" id="AAA_Table">
+                <thead>
+                <th data-column-id="id">主键</th>
+                <th data-column-id="menuId">菜单ID</th>
+                <th data-column-id="name">菜单名称</th>
+                <th data-column-id="menuLevel">菜单级别</th>
+                <th data-column-id="url">url</th>
+                <th data-column-id="status">状态</th>
+                <th data-column-id="parentMenuId">上一级菜单</th>
+                <th data-column-id="operation" data-formatter="operation">操作</th>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addDataDiv" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">添加菜单</h4>
+            </div>
+            <div class="modal-body">
+                <form id="addDataForm" method="post">
+                    <div class="form-group">
+                        <label for="name" class="control-label">菜单ID</label>
+                        <input type="text" id="add_menuId" name="menuId" class="form-control"/>
+                        <label for="name" class="control-label">菜单名称</label>
+                        <input type="text" id="name" name="name" class="form-control"/>
+                        <label for="add_menuLevel" class="control-label">菜单级别</label>
+                        <input type="text" id="add_menuLevel" name="menuLevel" class="form-control"/>
+                        <label for="add_url" class="control-label">URL</label>
+                        <input type="text" id="add_url" name="url" class="form-control"/>
+                        <label for="add_parentMenuId" class="control-label">上一级菜单</label>
+                        <input type="text" id="add_parentMenuId" name="parentMenuId" class="form-control"/>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="#" id="addDataBtn" class="btn btn-${_theme}">保存</a>
+                <a href="#" class="btn" data-dismiss="modal">取消</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="updateDataDiv" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">修改菜单</h4>
+            </div>
+            <div class="modal-body">
+                <form id="updateDataForm" method="post">
+                    <input type="hidden" id="update_id" name="id">
+                    <div class="form-group">
+                        <label for="name" class="control-label">菜单名称</label>
+                        <input type="text" id="update_name" name="name" class="form-control"/>
+                        <label for="update_menuId" class="control-label">菜单CODE</label>
+                        <input type="text" id="update_menuId" name="menuId" class="form-control" disabled/>
+                        <label for="update_url" class="control-label">URL</label>
+                        <input type="text" id="update_url" name="url" class="form-control" disabled/>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="#" id="updateDataBtn" class="btn btn-${_theme}">保存</a>
+                <a href="#" class="btn" data-dismiss="modal">取消</a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</html>
+
+
