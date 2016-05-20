@@ -24,6 +24,6 @@ public class ResourceInitListener
             e.printStackTrace();
         }*/
         //event.getServletContext().setAttribute("imagePath", imagePath);
-        //event.getServletContext().setAttribute("_theme", theme);
+        event.getServletContext().setAttribute("_theme", "danger");
     }
 }
