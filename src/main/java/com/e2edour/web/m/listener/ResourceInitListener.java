@@ -1,7 +1,6 @@
 package com.e2edour.web.m.listener;
 
 
-import java.util.ResourceBundle;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -24,6 +23,6 @@ public class ResourceInitListener
             e.printStackTrace();
         }*/
         //event.getServletContext().setAttribute("imagePath", imagePath);
-        event.getServletContext().setAttribute("_theme", "danger");
+        event.getServletContext().setAttribute("_theme", theme);
     }
 }
