@@ -6,35 +6,42 @@
     <#include "../resource.tag"/>
     <script src="${staticFileRoot}/js/views/fetcherIndexsManager/fetcher_indexs_manager.js"></script>
 </head>
-<div class="col-lg-4 col-lg-offset-4">
-    <form id="searchForm" method="post" class="form-horizontal">
-        <div class="form-group">
-            <button type="button" class="btn btn-${_theme}"
-                    id="searchBtn">查&nbsp;&nbsp;询
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <button type="button" class="btn btn-${_theme}"
-                    id="addBtn">新&nbsp;&nbsp;增
-            </button>
+<div class="animated fadeInRight">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li>&nbsp;&nbsp;爬虫管理</li>
+            <li>爬虫管理</li>
+        </ol>
+        <div class="col-lg-4 col-lg-offset-4">
+            <form id="searchForm" method="post" class="form-horizontal">
+                <div class="form-group">
+                    <button type="button" class="btn btn-${_theme}"
+                            id="searchBtn">查&nbsp;&nbsp;询
+                    </button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-${_theme}"
+                            id="addBtn">新&nbsp;&nbsp;增
+                    </button>
+                </div>
+            </form>
         </div>
-    </form>
-</div>
-<div class="col-lg-12">
-    <div class="panel panel-${_theme}" id="AAA_Panel" style="display: none;">
-        <div class="panel-heading">查询结果</div>
-        <div class="panel-body">
-            <table class="table table-hover table-condensed table-bordered table-striped" id="AAA_Table">
-                <thead>
-                <th data-column-id="id">ID</th>
-                <th data-column-id="className">类名</th>
-                <th data-column-id="urls" data-formatter="urls">URL地址</th>
-                <th data-column-id="operation" data-formatter="operation">操作</th>
-                </thead>
-            </table>
+        <div class="col-lg-12">
+            <div class="panel panel-${_theme}" id="AAA_Panel" style="display: none;">
+                <div class="panel-heading">查询结果</div>
+                <div class="panel-body">
+                    <table class="table table-hover table-condensed table-bordered table-striped" id="AAA_Table">
+                        <thead>
+                        <th data-column-id="id">ID</th>
+                        <th data-column-id="className">类名</th>
+                        <th data-column-id="urls" data-formatter="urls">URL地址</th>
+                        <th data-column-id="operation" data-formatter="operation">操作</th>
+                        </thead>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
 <div class="modal fade" id="addFetcherDiv" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

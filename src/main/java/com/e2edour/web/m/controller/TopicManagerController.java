@@ -2,6 +2,7 @@ package com.e2edour.web.m.controller;
 
 
 import com.e2edour.app.facade.TopicsFacade;
+import com.e2edour.app.facade.bean.CheckedTopicsBO;
 import com.e2edour.app.facade.bean.UncheckedTopicsBO;
 import com.e2edour.app.facade.response.CommonResponse;
 import com.e2edour.common.bean.Constants;
@@ -59,10 +60,51 @@ public class TopicManagerController {
      *
      * @return
      */
-    @RequestMapping(value = {"uncheckedTopicsManager/"+Constants.verify}, method = {RequestMethod.POST,RequestMethod.GET})
+    @RequestMapping(value = {"uncheckedTopicsManager/"+Constants.verify}, method = {RequestMethod.POST})
     @ResponseBody
-    public CommonResponse uncheckedTopicsManagerVerify(String[] ids, String status) {
-        CommonResponse response = topicsFacade.verifyUncheckedTopics(ids, status);
-        return response;
+    public String uncheckedTopicsManagerVerify(String[] ids, String status) {
+       if(topicsFacade.verifyUncheckedTopics(ids, status)){
+           return Constants.SUCCESS_CODE;
+       }
+        return Constants.ERROR_CODE;
+    }
+
+
+
+
+    @RequestMapping(value = {"checkedTopicsManager/" + Constants.pagePre}, method = {RequestMethod.GET, RequestMethod.POST})
+    public String checkedTopicsManagerPagePre() {
+        return prefix + "checked_topics_manager";
+    }
+
+    /**
+     * 查询审核贴子
+     *
+     * @return
+     */
+    @RequestMapping(value = {"checkedTopicsManager/" + Constants.queryForPage}, method = {RequestMethod.POST})
+    @ResponseBody
+    public Page<CheckedTopicsBO> checkedTopicsManagerQueryForPage(Page<?> page, CheckedTopicsBO checkedTopicsBO) {
+        Page<CheckedTopicsBO> result = null;
+        try {
+            result = topicsFacade.queryCheckedTopicsForPage(page, checkedTopicsBO);
+        } catch (Exception e) {
+            logger.error(LoggerUtil.getErrorMsg(e));
+        }
+        return result;
+    }
+
+    /**
+     * 审核审核贴子
+     *
+     * @return
+     */
+    @RequestMapping(value = {"checkedTopicsManager/"+Constants.deleteData}, method = {RequestMethod.POST,RequestMethod.GET})
+    @ResponseBody
+    public String checkedTopicsManagerDeleteData(String[] ids) {
+         if(topicsFacade.deleteCheckedTopics(ids)){
+             return Constants.SUCCESS_CODE;
+         }
+        return Constants.ERROR_CODE;
     }
 }

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <#include "../resource.tag"/>
-    <script src="${staticFileRoot}/js/views/topicsManager/unchecked_topics_manager.js"></script>
+    <script src="${staticFileRoot}/js/views/topicsManager/checked_topics_manager.js"></script>
     <!-- 时间控件 -->
     <script type='text/javascript' src="${staticFileRoot}/js/bootstrap-datetimepicker-util.min.js"></script>
 </head>
@@ -12,7 +12,7 @@
     <div class="row">
         <ol class="breadcrumb">
             <li>&nbsp;&nbsp;笑话管理</li>
-            <li>未审核贴管理</li>
+            <li>已审核贴管理</li>
         </ol>
         <form id="searchForm" method="post" class="form-horizontal">
             <div class="form-group"><br>
@@ -73,11 +73,8 @@
                         <th data-column-id="operation" data-formatter="operation">操作</th>
                         </thead>
                     </table>
-                    <button type="button" class="btn btn-success glyphicon glyphicon-ok" id="verifyPassBtn">
-                        通过
-                    </button>
-                    <button type="button" class="btn btn-danger glyphicon glyphicon-remove-circle" id="verifyRejectBtn">
-                        不通过
+                    <button type="button" class="btn btn-danger glyphicon glyphicon-remove-circle" id="btnDelete">
+                        删除
                     </button>
                 </div>
             </div>
