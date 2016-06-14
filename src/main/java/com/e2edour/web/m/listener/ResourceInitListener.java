@@ -7,7 +7,7 @@ import javax.servlet.ServletContextListener;
 
 public class ResourceInitListener
         implements ServletContextListener {
-    private static String theme = "success";
+    private static String theme = "primary";
 
     public void contextDestroyed(ServletContextEvent event) {
     }

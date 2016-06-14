@@ -3,7 +3,6 @@ package com.e2edour.web.m.controller;
 
 import com.e2edour.app.facade.FetcherFacade;
 import com.e2edour.app.facade.bean.FetcherIndexBO;
-import com.e2edour.app.facade.response.CommonResponse;
 import com.e2edour.common.bean.Constants;
 import com.e2edour.common.bean.Page;
 import com.e2edour.common.utils.XmlUtil;
@@ -24,7 +23,7 @@ public class FetcherIndexsManagerController {
 
     private static final String prefix = "fetcherIndexsManager/";
 
-    private Logger logger = LoggerFactory.getLogger(getClass());
+    //private Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
     private FetcherFacade fetcherFacade;
 
@@ -37,23 +36,33 @@ public class FetcherIndexsManagerController {
     @ResponseBody
     public Page<FetcherIndexBO> queryForPage(Page<?> page) {
         Page<FetcherIndexBO> resultPage = fetcherFacade.queryFetcherIndexsForPage(page);
-        logger.info("fetcherFacade getFetcherIndexs res \n:{}",XmlUtil.toXml(resultPage));
         return resultPage;
     }
 
     @RequestMapping(value = {Constants.addData}, method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
-    public CommonResponse addData(FetcherIndexBO fetcherIndexBO) {
-        CommonResponse response = fetcherFacade.addFetcherIndex(fetcherIndexBO);
-        logger.info("fetcherFacade addFetcherIndex res : \n {}", XmlUtil.toXml(response));
-        return response;
+    public String addData(FetcherIndexBO fetcherIndexBO) {
+        if(fetcherFacade.addFetcherIndex(fetcherIndexBO)){
+            return Constants.SUCCESS_CODE;
+        }
+        return Constants.ERROR_CODE;
     }
 
     @RequestMapping(value = {Constants.deleteData}, method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
-    public CommonResponse deleteData(FetcherIndexBO fetcherIndexBO) {
-        CommonResponse response = fetcherFacade.deleteFetcherIndex(fetcherIndexBO);
-        logger.info("fetcherFacade addFetcherIndex res : \n {}", XmlUtil.toXml(response));
-        return response;
+    public String deleteData(FetcherIndexBO fetcherIndexBO) {
+        if(fetcherFacade.deleteFetcherIndex(fetcherIndexBO)){
+            return Constants.SUCCESS_CODE;
+        }
+        return Constants.ERROR_CODE;
+    }
+
+    @RequestMapping(value = {Constants.updateData}, method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public String updateData(FetcherIndexBO fetcherIndexBO) {
+        if(fetcherFacade.updateFetcherIndex(fetcherIndexBO)){
+            return Constants.SUCCESS_CODE;
+        }
+        return Constants.ERROR_CODE;
     }
 }

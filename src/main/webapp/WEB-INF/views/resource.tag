@@ -15,4 +15,5 @@
 <script type='text/javascript' src="${staticFileRoot}/jquery.bootgrid-1.2.0/jquery.bootgrid.min.js"></script>
 <script type='text/javascript' src="${staticFileRoot}/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 <script type='text/javascript' src="${staticFileRoot}/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<script type='text/javascript' src="${staticFileRoot}/js/common.js"></script>
 

@@ -16,30 +16,6 @@ $(function () {
             $("#verifyRejectBtn").on("click", function () {
                 page.logic.verifyAll("reject");
             });
-            $("#AAA_Table").delegate(".btn-xs", "click", function () {
-                var id = $(this).attr('data-row-id');
-                var status = $(this).attr('data-row-status5');
-                $.messager.confirm("操作提示", "您确定要执行操作吗？", function (data) {
-                    if (data) {
-                        var ids = [];
-                        ids.push(id);
-                        $.ajax({
-                            url: page.location.verify,
-                            type: "POST",
-                            async: false,
-                            data: {ids: ids.toString(), status: status},
-                            success: function (response) {
-                                if (response.code = '000000') {
-                                    $.messager.alert("操作成功");
-                                    page.logic.queryForPage();
-                                }
-                            }
-                        })
-                    }
-                });
-            });
-            /*$("#btnSingleOk").on("click", page.logic.verifyOne);
-             $("#btnSingleCancle").on("click", page.logic.verifyOne);*/
         },
         logic: {
             queryForPage: function () {
@@ -53,40 +29,39 @@ $(function () {
                     navigation: 2,
                     formatters: {
                         "operation": function (column, row) {
-                            return "<button id=\"btnSingleOk\" type=\"button\" class=\"btn btn-xs btn-success glyphicon glyphicon-pencil\" data-row-id=\"" + row.id + "\" data-row-status='pass' onclick=\"verifyOne()\"/>" +
-                                "&nbsp;&nbsp;&nbsp;&nbsp;<button id=\"btnSingleCancle\" type=\"button\" class=\"btn btn-xs btn-danger glyphicon glyphicon-remove-circle\" data-row-id=\"" + row.id + "\" data-row-status='reject' onclick=\"verifyOne()\"/>";
+                            return "<button  data-verify=\"verify\" type=\"button\" class=\"btn btn-xs btn-success glyphicon glyphicon-ok\" data-row-id=\"" + row.id + "\" data-row-status='pass'/>" +
+                                "&nbsp;&nbsp;&nbsp;&nbsp;<button data-verify=\"verify\" type=\"button\" class=\"btn btn-xs btn-danger glyphicon glyphicon-remove-circle\" data-row-id=\"" + row.id + "\" data-row-status='reject'/>";
                         },
                         "content": function (column, row) {
-                            return "<a href=\"javascript:void(0);\" data-toggle=\"tooltip\" title=\" " + row.content + "\">" + row.content + "</a>";
+                            return "<a href=\"javascript:void(0);\" class=\"alert-link\" data-toggle=\"tooltip\" data-placement=\"right\" title=\" " + row.content + "\">" + row.content + "</a>";
                         }
                     }
+                }).on("loaded.rs.jquery.bootgrid", function () {
+                    $('[data-toggle="tooltip"]').tooltip();
+
+                    $('[data-verify="verify"]').on("click", function () {
+                        var id = $(this).attr('data-row-id');
+                        var status = $(this).attr('data-row-status');
+                        $.messager.confirm("操作提示", "您确定要执行操作吗？", function () {
+                            var ids = [];
+                            ids.push(id);
+                            $.ajax({
+                                url: page.location.verify,
+                                type: "POST",
+                                async: false,
+                                data: {ids: ids.toString(), status: status},
+                                success: function (response) {
+                                    if (response.code = '000000') {
+                                        $.messager.alert("操作成功");
+                                        page.logic.queryForPage();
+                                    }
+                                }
+                            })
+                        })
+                    });
                 });
                 $("#AAA_Table").bootgrid("reload");
                 $("#AAA_Panel").show();
-            },
-            verifyOne: function () {
-                var id = $(this).attr('data-row-id');
-                var status = $(this).attr('data-row-status5');
-                $.messager.confirm("操作提示", "您确定要执行操作吗？", function (data) {
-                    if (data) {
-                        var ids = [];
-                        ids.push(id);
-                        $.ajax({
-                            url: page.location.verify,
-                            type: "POST",
-                            async: false,
-                            data: {ids: ids.toString(), status: status},
-                            success: function (response) {
-                                if (response.code = '000000') {
-                                    $.messager.alert("操作成功");
-                                    page.logic.queryForPage();
-                                }
-                            }
-                        })
-                    }
-                });
-
-
             },
             verifyAll: function (status) {
                 var ids = [];
@@ -106,7 +81,7 @@ $(function () {
                         async: false,
                         data: {ids: ids.toString(), status: status},
                         success: function (response) {
-                            if (response= '000000') {
+                            if (response == '000000') {
                                 $.messager.alert("操作成功");
                                 page.logic.queryForPage();
                             }

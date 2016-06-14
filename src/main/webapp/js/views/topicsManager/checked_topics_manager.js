@@ -2,7 +2,7 @@ $(function () {
     var page = {
         location: {
             queryForPage: "/topicsManager/checkedTopicsManager/queryForPage",
-            verify: "/topicsManager/checkedTopicsManager/deleteData"
+            deleteData: "/topicsManager/checkedTopicsManager/deleteData"
         },
         init: function () {
             $('[data-toggle="tooltip"]').tooltip();
@@ -10,7 +10,7 @@ $(function () {
         },
         bindUI: function () {
             $("#searchBtn").on("click", page.logic.queryForPage);
-            $("#btnDelete").on("click", page.logic.deleteAll);
+            $("#btnDelete").on("click", page.logic.verifyAll);
         },
         logic: {
             queryForPage: function () {
@@ -24,41 +24,39 @@ $(function () {
                     navigation: 2,
                     formatters: {
                         "operation": function (column, row) {
-                            return "&nbsp;&nbsp;&nbsp;&nbsp;<button id=\"btnSingleCancle\" type=\"button\" class=\"btn btn-xs btn-danger glyphicon glyphicon-remove-circle\" data-row-id=\"" + row.id + "\" data-row-status='reject' onclick=\"verifyOne()\"/>";
+                            return "&nbsp;&nbsp;&nbsp;&nbsp;<button data-verify=\"verify\" type=\"button\" class=\"btn btn-xs btn-danger glyphicon glyphicon-remove-circle\" data-row-id=\"" + row.id + "\"/>";
                         },
                         "content": function (column, row) {
-                            return "<a href=\"javascript:void(0);\" data-toggle=\"tooltip\" title=\" " + row.content + "\">" + row.content + "</a>";
+                            return "<a href=\"javascript:void(0);\" class=\"alert-link\" data-toggle=\"tooltip\" data-placement=\"right\" title=\" " + row.content + "\">" + row.content + "</a>";
                         }
                     }
+                }).on("loaded.rs.jquery.bootgrid", function () {
+                    $('[data-toggle="tooltip"]').tooltip();
+
+                    $('[data-verify="verify"]').on("click", function () {
+                        var id = $(this).attr('data-row-id');
+                        $.messager.confirm("操作提示", "您确定要执行操作吗？", function () {
+                            var ids = [];
+                            ids.push(id);
+                            $.ajax({
+                                url: page.location.deleteData,
+                                type: "POST",
+                                async: false,
+                                data: {ids: ids.toString()},
+                                success: function (response) {
+                                    if (response.code = '000000') {
+                                        $.messager.alert("操作成功");
+                                        page.logic.queryForPage();
+                                    }
+                                }
+                            })
+                        })
+                    });
                 });
                 $("#AAA_Table").bootgrid("reload");
                 $("#AAA_Panel").show();
             },
-            verifyOne: function () {
-                var id = $(this).attr('data-row-id');
-                var status = $(this).attr('data-row-status5');
-                $.messager.confirm("操作提示", "您确定要执行操作吗？", function (data) {
-                    if (data) {
-                        var ids = [];
-                        ids.push(id);
-                        $.ajax({
-                            url: page.location.verify,
-                            type: "POST",
-                            async: false,
-                            data: {ids: ids.toString(), status: status},
-                            success: function (response) {
-                                if (response.code = '000000') {
-                                    $.messager.alert("操作成功");
-                                    page.logic.queryForPage();
-                                }
-                            }
-                        })
-                    }
-                });
-
-
-            },
-            deleteAll: function () {
+            verifyAll: function () {
                 var ids = [];
                 $('input[name="select"]:checked').each(function () {
                     if ("all" != $(this).val()) {
@@ -69,14 +67,14 @@ $(function () {
                     $.messager.alert("警告", "请选择要操作的数据!");
                     return;
                 }
-                $.messager.confirm("操作提示", "您确定要执行操作吗？", function () {
+                $.messager.confirm("提示", "您确定要执行操作吗？", function () {
                     $.ajax({
-                        url: page.location.verify,
+                        url: page.location.deleteData,
                         type: "POST",
                         async: false,
                         data: {ids: ids.toString()},
                         success: function (response) {
-                            if (response.code = '000000') {
+                            if (response == '000000') {
                                 $.messager.alert("操作成功");
                                 page.logic.queryForPage();
                             }
